@@ -31,11 +31,16 @@ public class Dashboard extends javax.swing.JFrame {
         panelBorder1 = new dashboard.swing.PanelBorder();
         menu2 = new dashboard.components.Menu();
         header2 = new dashboard.components.Header();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        form_Home1 = new dashboard.form.Form_Home();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(239, 234, 234));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setViewportView(form_Home1);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -43,15 +48,20 @@ public class Dashboard extends javax.swing.JFrame {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE))
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)
+                        .addGap(6, 6, 6))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu2, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,7 +72,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -105,7 +115,9 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private dashboard.form.Form_Home form_Home1;
     private dashboard.components.Header header2;
+    private javax.swing.JScrollPane jScrollPane1;
     private dashboard.components.Menu menu2;
     private dashboard.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables

@@ -35,6 +35,7 @@ public class Dashboard extends javax.swing.JFrame {
         form_Home1 = new dashboard.form.Form_Home();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dashboard");
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(239, 234, 234));

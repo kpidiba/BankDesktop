@@ -1,14 +1,18 @@
 package dashboard.form;
 
+import dashboard.model.StatusType;
 import dashboard.model.Model_Card;
+import dashboard.swing.ScrollBar;
+import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author programmer
@@ -20,10 +24,31 @@ public class Form_Home extends javax.swing.JPanel {
      */
     public Form_Home() {
         initComponents();
+//        Setup the card
         card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/dashboard/icons/stock.png")), "Stock Total", "$200000", "Increased by 60%"));
         card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/dashboard/icons/profit.png")), "Total Profit", "$15000", "Increased by 25%"));
         card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/dashboard/icons/flag.png")), "Unique Visitors", "$300000", "Increased by 70%"));
-        
+//        Setup the TAble
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        table.addRow(new Object[]{"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
+        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
+        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
+        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
     }
 
     /**
@@ -39,6 +64,10 @@ public class Form_Home extends javax.swing.JPanel {
         card2 = new dashboard.components.Card();
         card3 = new dashboard.components.Card();
         card1 = new dashboard.components.Card();
+        panelBorder1 = new dashboard.swing.PanelBorder();
+        jLabel1 = new javax.swing.JLabel();
+        spTable = new javax.swing.JScrollPane();
+        table = new dashboard.swing.Table();
 
         setBackground(new java.awt.Color(239, 234, 234));
 
@@ -56,13 +85,57 @@ public class Form_Home extends javax.swing.JPanel {
         card1.setColor2(new java.awt.Color(123, 123, 250));
         panel.add(card1);
 
+        jLabel1.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(127, 127, 127));
+        jLabel1.setText("Standard Table Design");
+
+        spTable.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Email", "UserType", "Joined", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        spTable.setViewportView(table);
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(spTable)
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -70,7 +143,9 @@ public class Form_Home extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -79,6 +154,10 @@ public class Form_Home extends javax.swing.JPanel {
     private dashboard.components.Card card1;
     private dashboard.components.Card card2;
     private dashboard.components.Card card3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane panel;
+    private dashboard.swing.PanelBorder panelBorder1;
+    private javax.swing.JScrollPane spTable;
+    private dashboard.swing.Table table;
     // End of variables declaration//GEN-END:variables
 }

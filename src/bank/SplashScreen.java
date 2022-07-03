@@ -34,9 +34,11 @@ public class SplashScreen extends javax.swing.JFrame {
         pourcent = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SplashScreen");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 153));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("");
 
         loadingBar.setBackground(new java.awt.Color(255, 255, 255));
         loadingBar.setForeground(new java.awt.Color(0, 153, 0));

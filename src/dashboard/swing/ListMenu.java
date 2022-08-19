@@ -2,7 +2,12 @@ package dashboard.swing;
 
 import dashboard.event.EventMenuSelected;
 import dashboard.model.Model_Menu;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -18,7 +23,27 @@ public class ListMenu<E extends Object> extends JList<E> {
     private int selectedIndex = -1;
     private int overIndex = -1;
     private EventMenuSelected event;
+    
+    public Color getColor1() {
+        return color1;
+    }
 
+    public void setColor1(Color color1) {
+        this.color1 = color1;
+    }
+
+    public Color getColor2() {
+        return color2;
+    }
+
+    public void setColor2(Color color2) {
+        this.color2 = color2;
+    }
+    
+    private Color color1;
+    private Color color2;
+    
+    
     public void addEventMenuSelected(EventMenuSelected event) {
         this.event = event;
     }
@@ -26,6 +51,8 @@ public class ListMenu<E extends Object> extends JList<E> {
     public ListMenu() {
         model = new DefaultListModel();
         setModel(model);
+        color1 = Color.decode("#1CB5E0");
+        color2 = Color.decode("#000046");
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -72,6 +99,18 @@ public class ListMenu<E extends Object> extends JList<E> {
             }
         });
     }
+    
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        GradientPaint g = new GradientPaint(0, 0, color1, 0, getHeight(), color2);
+        g2.setPaint(g);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+        g2.setColor(new Color(255, 255, 255, 50));
+        super.paintComponent(grphcs);
+    }
+    
 
     @Override
     public ListCellRenderer<? super E> getCellRenderer() {

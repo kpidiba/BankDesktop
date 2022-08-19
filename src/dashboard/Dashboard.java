@@ -5,6 +5,14 @@
  */
 package dashboard;
 
+import dashboard.event.EventMenuSelected;
+import dashboard.form.Form_Home;
+import dashboard.form.Form_Send;
+import dashboard.form.Form_Setting;
+import dashboard.form.Form_User;
+import java.awt.Color;
+import javax.swing.JComponent;
+
 /**
  *
  * @author programmer
@@ -14,9 +22,44 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    private Form_Home home;
+    private Form_Send form1;
+    private Form_User form2;
+    private Form_Setting form3;
+     
+    
     public Dashboard() {
         initComponents();
-        menu2.initMoving(Dashboard.this);
+        
+        setBackground(new Color(0, 0, 0, 0));
+        home = new Form_Home();
+        form1 = new Form_Send();
+        form2 = new Form_User();
+        form3 = new Form_Setting();
+        menu.initMoving(Dashboard.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                System.out.println("Selected Index: " +index);
+                if (index == 0) {
+                    setForm(home);
+                } else if (index == 1) {
+                    setForm(form1);
+                } else if (index == 2) {
+                    setForm(form2);
+                } else if (index == 3) {
+                    setForm(form3);
+                }
+            }
+        });
+        setForm(new Form_Home());
+    }
+    
+    private void setForm(JComponent com) {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
 
     /**
@@ -29,10 +72,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new dashboard.swing.PanelBorder();
-        menu2 = new dashboard.components.Menu();
+        menu = new dashboard.components.Menu();
         header2 = new dashboard.components.Header();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        form_Home1 = new dashboard.form.Form_Home();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard");
@@ -40,29 +82,30 @@ public class Dashboard extends javax.swing.JFrame {
 
         panelBorder1.setBackground(new java.awt.Color(239, 234, 234));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setViewportView(form_Home1);
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)
-                        .addGap(6, 6, 6))))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu2, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -73,7 +116,9 @@ public class Dashboard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 76, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,10 +161,9 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private dashboard.form.Form_Home form_Home1;
     private dashboard.components.Header header2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private dashboard.components.Menu menu2;
+    private javax.swing.JPanel mainPanel;
+    private dashboard.components.Menu menu;
     private dashboard.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }
